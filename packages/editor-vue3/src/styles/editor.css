@@ -1,0 +1,337 @@
+/*
+ * easy-editor 样式。
+ *
+ * 全部挂在 .easy-editor 命名空间下，并且是全局样式而非 scoped——
+ * ProseMirror 的 DOM 是 Tiptap 用 JS 建出来的，拿不到 scoped 的属性选择器。
+ *
+ * 主题通过 CSS 变量开放：消费方覆盖 .easy-editor 上的 --ee-* 即可换肤，
+ * 不需要碰组件源码，也不需要重新编译。
+ */
+
+.easy-editor {
+  --ee-bg: #ffffff;
+  --ee-fg: #1f2328;
+  --ee-muted: #8b949e;
+  --ee-border: #e2e4e9;
+  --ee-toolbar-bg: #fbfbfc;
+  --ee-hover-bg: #f0f1f4;
+  --ee-active-bg: #e8ecff;
+  --ee-active-fg: #3f4ee0;
+  --ee-focus-ring: #3f4ee0;
+  --ee-radius: 10px;
+  --ee-radius-sm: 6px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--ee-border);
+  border-radius: var(--ee-radius);
+  background: var(--ee-bg);
+  color: var(--ee-fg);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.easy-editor.is-disabled {
+  opacity: 0.65;
+}
+
+/* ---------------------------------------------------------------- 工具栏 */
+
+.easy-editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--ee-border);
+  background: var(--ee-toolbar-bg);
+}
+
+.easy-editor-toolbar__divider {
+  width: 1px;
+  height: 18px;
+  margin: 0 4px;
+  background: var(--ee-border);
+}
+
+.easy-editor-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--ee-radius-sm);
+  background: transparent;
+  color: var(--ee-fg);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.easy-editor-button:hover:not(:disabled) {
+  background: var(--ee-hover-bg);
+}
+
+.easy-editor-button.is-active {
+  background: var(--ee-active-bg);
+  color: var(--ee-active-fg);
+}
+
+.easy-editor-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.easy-editor-button:focus-visible,
+.easy-editor-select:focus-visible,
+.easy-editor-color__trigger:focus-visible {
+  outline: 2px solid var(--ee-focus-ring);
+  outline-offset: 1px;
+}
+
+/* 原生 select 长得太各异，统一剥掉默认外观再自己画箭头。 */
+.easy-editor-select {
+  height: 30px;
+  padding: 0 24px 0 8px;
+  border: none;
+  border-radius: var(--ee-radius-sm);
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.8 6 7.8l3-3' fill='none' stroke='%238b949e' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 12px 12px;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+}
+
+.easy-editor-select:hover {
+  background-color: var(--ee-hover-bg);
+}
+
+/* ---------------------------------------------------------------- 取色器 */
+
+.easy-editor-color {
+  position: relative;
+  display: inline-flex;
+}
+
+.easy-editor-color__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: var(--ee-radius-sm);
+  background-color: transparent;
+  color: var(--ee-fg);
+  cursor: pointer;
+}
+
+.easy-editor-color__trigger:hover,
+.easy-editor-color__trigger.is-open {
+  background: var(--ee-hover-bg);
+}
+
+.easy-editor-color__glyph {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.easy-editor-color__trigger--background .easy-editor-color__glyph {
+  padding: 0 3px;
+  border-radius: 3px;
+}
+
+.easy-editor-color__panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 20;
+  width: 208px;
+  padding: 10px;
+  border: 1px solid var(--ee-border);
+  border-radius: var(--ee-radius);
+  background: var(--ee-bg);
+  box-shadow: 0 8px 24px rgb(15 23 42 / 12%);
+}
+
+.easy-editor-color__grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+
+.easy-editor-color__swatch {
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid rgb(15 23 42 / 12%);
+  border-radius: 4px;
+  /* 透明色用棋盘格打底，否则看不出它是透明的 */
+  background-color: var(--swatch-color);
+  background-image: linear-gradient(45deg, #d0d7de 25%, transparent 25%),
+    linear-gradient(-45deg, #d0d7de 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #d0d7de 75%),
+    linear-gradient(-45deg, transparent 75%, #d0d7de 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+  cursor: pointer;
+}
+
+.easy-editor-color__swatch:hover {
+  transform: scale(1.12);
+}
+
+.easy-editor-color__swatch.is-selected {
+  border-color: var(--ee-focus-ring);
+  box-shadow: 0 0 0 2px var(--ee-active-bg);
+}
+
+.easy-editor-color__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--ee-border);
+}
+
+.easy-editor-color__custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ee-muted);
+  cursor: pointer;
+}
+
+.easy-editor-color__custom input[type='color'] {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid var(--ee-border);
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+}
+
+.easy-editor-color__custom input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.easy-editor-color__custom input[type='color']::-webkit-color-swatch {
+  border: none;
+  border-radius: 3px;
+}
+
+.easy-editor-color__clear {
+  padding: 3px 8px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ee-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.easy-editor-color__clear:hover {
+  background: var(--ee-hover-bg);
+  color: var(--ee-fg);
+}
+
+/* ------------------------------------------------------------ 编辑区域 */
+
+.easy-editor__content {
+  flex: 1;
+  min-height: 0;
+}
+
+/* ProseMirror 的基础样式需要自己提供，Tiptap 不会自动注入。 */
+.easy-editor .ProseMirror {
+  position: relative;
+  min-height: 240px;
+  max-height: 60vh;
+  padding: 16px 18px;
+  overflow-y: auto;
+  outline: none;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.easy-editor .ProseMirror > * + * {
+  margin-top: 0.65em;
+}
+
+.easy-editor .ProseMirror h1,
+.easy-editor .ProseMirror h2,
+.easy-editor .ProseMirror h3 {
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.easy-editor .ProseMirror h1 {
+  font-size: 1.75em;
+}
+
+.easy-editor .ProseMirror h2 {
+  font-size: 1.4em;
+}
+
+.easy-editor .ProseMirror h3 {
+  font-size: 1.15em;
+}
+
+.easy-editor .ProseMirror ul,
+.easy-editor .ProseMirror ol {
+  padding-left: 1.5em;
+}
+
+.easy-editor .ProseMirror ul {
+  list-style: disc;
+}
+
+.easy-editor .ProseMirror ol {
+  list-style: decimal;
+}
+
+.easy-editor .ProseMirror li p {
+  margin: 0;
+}
+
+.easy-editor .ProseMirror li + li {
+  margin-top: 0.25em;
+}
+
+.easy-editor .ProseMirror code {
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+  background: var(--ee-hover-bg);
+  font-size: 0.9em;
+}
+
+.easy-editor .ProseMirror blockquote {
+  padding-left: 0.9em;
+  border-left: 3px solid var(--ee-border);
+  color: var(--ee-muted);
+}
+
+/* Placeholder 扩展在第一行打 is-editor-empty，文案放在 data-placeholder 属性上。 */
+.easy-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: var(--ee-muted);
+  pointer-events: none;
+}

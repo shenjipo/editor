@@ -1,0 +1,7 @@
+packages:
+  - 'packages/*'
+
+# pnpm 10 默认不跑依赖的 postinstall：esbuild / rollup 的原生二进制靠它装，
+# 不批准的话 vite 和 tsup 都起不来。
+onlyBuiltDependencies:
+  - esbuild
