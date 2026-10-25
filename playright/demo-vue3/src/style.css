@@ -1,0 +1,31 @@
+:root {
+  color-scheme: light;
+  font-family:
+    'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui,
+    sans-serif;
+  color: #1f2328;
+  background: #f6f7f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.9em;
+}
+
+/* 演示通过 CSS 变量换肤 */
+.easy-editor {
+  --ee-border: #d0d7de;
+  --ee-toolbar-bg: #f6f8fa;
+  --ee-active-bg: #dbeafe;
+  --ee-active-fg: #1d4ed8;
+  --ee-radius: 8px;
+}

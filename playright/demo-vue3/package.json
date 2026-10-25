@@ -1,0 +1,28 @@
+{
+  "name": "playright-demo-vue3",
+  "version": "0.0.0",
+  "private": true,
+  "description": "独立消费者 Demo：只使用 npm registry 上发布的 @shenjipo/editor-vue3",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@shenjipo/editor-core": "1.0.0",
+    "@shenjipo/editor-vue3": "1.0.0",
+    "@tiptap/core": "3.31.3",
+    "@tiptap/extension-bubble-menu": "3.31.3",
+    "@tiptap/extension-floating-menu": "3.31.3",
+    "@tiptap/pm": "3.31.3",
+    "@tiptap/vue-3": "3.31.3",
+    "vue": "^3.5.43"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.9",
+    "typescript": "^5.9.2",
+    "vite": "^8.3.1",
+    "vue-tsc": "^3.3.11"
+  }
+}

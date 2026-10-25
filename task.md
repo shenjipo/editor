@@ -41,3 +41,9 @@ pnpm install @wangeditor/editor-for-vue@next
 
 ## v5
 新增demo-vue2 demo文件夹我已经建好，使用vue2.7，vite4.0，demo功能和demo-vue3类似
+
+## v6
+在playright中demo-vue3，使用pnpm i @shenjipo/editor-core 和 pnpm i @shenjipo/editor-vue3，模拟一个普通项目使用npm上发布的组件库来写一个这个editor的demo，不要和此项目下的依赖和文件产生任何的关系，模拟真实的用户使用是否正常
+
+## v7
+在playright中demo-vue2，使用pnpm i @shenjipo/editor-core 和 pnpm i @shenjipo/editor-vue2，模拟一个普通项目使用npm上发布的组件库来写一个这个editor的demo，不要和此项目下的依赖和文件产生任何的关系，模拟真实的用户使用是否正常
