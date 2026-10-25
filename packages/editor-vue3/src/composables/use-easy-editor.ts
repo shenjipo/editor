@@ -3,7 +3,7 @@ import { useEditor } from '@tiptap/vue-3'
 import { createEasyEditorExtensions, snapshotContent } from '@easy-editor/core'
 
 import type { Editor } from '@tiptap/vue-3'
-import type { EditorContentSnapshot } from '@easy-editor/core'
+import type { EasyMentionSource, EditorContentSnapshot } from '@easy-editor/core'
 import type { JSONContent } from '@tiptap/core'
 import type { ShallowRef } from 'vue'
 
@@ -12,6 +12,8 @@ export interface UseEasyEditorOptions {
   placeholder?: string
   editable?: boolean
   autofocus?: boolean
+  /** 提及触发源；创建期选项，运行中改不生效。 */
+  mentions?: readonly EasyMentionSource[]
   onChange?: (snapshot: EditorContentSnapshot) => void
 }
 
@@ -28,10 +30,10 @@ export interface UseEasyEditorOptions {
  * （v2 时代的 immediatelyRender 选项在 v3 已被移除，不要照旧文档传它。）
  */
 export function useEasyEditor(options: UseEasyEditorOptions = {}): ShallowRef<Editor | undefined> {
-  const { content = '', placeholder, editable = true, autofocus = false, onChange } = options
+  const { content = '', placeholder, editable = true, autofocus = false, mentions, onChange } = options
 
   return useEditor({
-    extensions: createEasyEditorExtensions({ placeholder }),
+    extensions: createEasyEditorExtensions({ placeholder, mentions }),
     content,
     editable,
     autofocus,

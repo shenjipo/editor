@@ -1,3 +1,5 @@
+import { redoDepth, undoDepth } from '@tiptap/pm/history'
+
 import type { Editor } from '@tiptap/core'
 
 import { HEADING_LEVELS, PARAGRAPH_VALUE } from './constants'
@@ -27,6 +29,8 @@ export function getActiveFormats(editor: Editor): ActiveFormats {
   }
 
   const blockType: BlockTypeValue = headingLevel ? `h${headingLevel}` : PARAGRAPH_VALUE
+  const linkAttributes = editor.getAttributes('link') as { href?: string }
+  const codeBlockLanguage = editor.getAttributes('codeBlock').language as string | undefined
 
   return {
     blockType,
@@ -36,5 +40,17 @@ export function getActiveFormats(editor: Editor): ActiveFormats {
     backgroundColor: textStyleAttributes.backgroundColor ?? null,
     bulletList: editor.isActive('bulletList'),
     orderedList: editor.isActive('orderedList'),
+
+    bold: editor.isActive('bold'),
+    italic: editor.isActive('italic'),
+    underline: editor.isActive('underline'),
+    codeBlock: editor.isActive('codeBlock'),
+    codeBlockLanguage: codeBlockLanguage ?? null,
+    link: linkAttributes.href ?? null,
+    // 直接读历史栈的深度，不用 editor.can().undo()——后者每次调用都要新建一个
+    // Transaction 并按命令数分配闭包（这个编辑器有 100+ 条命令），
+    // 而这里是每个事务都要跑的热路径。undoDepth 是 O(1) 的纯读取。
+    canUndo: undoDepth(editor.state) > 0,
+    canRedo: redoDepth(editor.state) > 0,
   }
 }

@@ -161,3 +161,117 @@ code {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
 }
+
+/* -------------------------------------------------------------- 互通演示 */
+
+.page > .card + .card,
+.page > .panels + .card {
+  margin-top: 20px;
+}
+
+.section__title {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.section__desc {
+  margin: 0 0 12px;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.hint {
+  margin: 10px 0 0;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+/* 放进 .card__actions 那一行里的提示文字，不要上下外边距。 */
+.hint--inline {
+  margin: 0;
+}
+
+.action--primary {
+  border-color: #3f4ee0;
+  background: #3f4ee0;
+  color: #fff;
+}
+
+.action--primary:hover {
+  background: #3542c4;
+}
+
+/* 放在 --primary 之后：否则禁用的主按钮会被上面的 hover 规则盖掉背景色。 */
+.action:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.action:disabled:hover {
+  background: #fff;
+}
+
+.divider {
+  width: 1px;
+  height: 18px;
+  background: #e2e4e9;
+}
+
+.interop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .interop {
+    grid-template-columns: 1fr;
+  }
+}
+
+.interop__column {
+  min-width: 0;
+}
+
+.interop__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.interop__badge {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #e8ecff;
+  color: #3f4ee0;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.interop__badge--wang {
+  background: #e6f4ea;
+  color: #1a7f37;
+}
+
+/* wangEditor 自带的边框和圆角跟 easy-editor 不一致，套一层壳统一观感。 */
+.wang-host {
+  overflow: hidden;
+  border: 1px solid #e2e4e9;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.wang-host .w-e-toolbar {
+  border-bottom: 1px solid #e2e4e9 !important;
+}
+
+.wang-host .w-e-text-container {
+  min-height: 240px;
+  max-height: 60vh;
+}

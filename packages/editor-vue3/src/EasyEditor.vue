@@ -2,12 +2,16 @@
 import { EditorContent } from '@tiptap/vue-3'
 import { watch } from 'vue'
 
-import { snapshotContent } from '@easy-editor/core'
+import { clearContent, snapshotContent } from '@easy-editor/core'
 
 import EditorToolbar from './components/EditorToolbar.vue'
+import ImagePanel from './components/ImagePanel.vue'
+import TablePanel from './components/TablePanel.vue'
 import { useEasyEditor } from './composables/use-easy-editor'
+import { createMentionSources } from './mention'
 
 import type { EditorContentSnapshot } from '@easy-editor/core'
+import type { MentionSource } from './mention'
 import type { JSONContent } from '@tiptap/core'
 
 /** v-model 的值可以收 HTML 字符串，也可以收 Tiptap JSON。 */
@@ -23,6 +27,20 @@ const props = withDefaults(
     editable?: boolean
     autofocus?: boolean
     showToolbar?: boolean
+    /**
+     * 图片上传实现。传入时「本地上传」页签走它，返回图片地址；
+     * 不传则退回 FileReader 读成 base64 内联——开箱即用，不需要后端。
+     */
+    uploadImage?: (file: File) => string | Promise<string>
+    /** 图片文件选择框的 accept。 */
+    imageAccept?: string
+    /**
+     * 提及触发源：每个 source 对应一个符号（@ / # …），可同时配多个。
+     *
+     * 不传则 schema 里没有 mention 节点。**创建期选项**——运行中改数组不会生效，
+     * 因为扩展集只在编辑器创建时装配一次。
+     */
+    mentionSources?: readonly MentionSource[]
   }>(),
   {
     modelValue: null,
@@ -31,6 +49,7 @@ const props = withDefaults(
     editable: true,
     autofocus: false,
     showToolbar: true,
+    imageAccept: 'image/*',
   },
 )
 
@@ -56,11 +75,18 @@ function isSameContent(a: EditorValue | null | undefined, b: EditorValue | null 
   return JSON.stringify(a) === JSON.stringify(b)
 }
 
+/**
+ * 框架层配置 → 核心包认识的形式：给每个触发源注入 Vue 弹层实现。
+ * 只在 setup 里算一次，和扩展集的创建周期一致。
+ */
+const mentions = props.mentionSources?.length ? createMentionSources(props.mentionSources) : undefined
+
 const editor = useEasyEditor({
   content: props.modelValue ?? '',
   placeholder: props.placeholder || undefined,
   editable: props.editable,
   autofocus: props.autofocus,
+  mentions,
   onChange: (snapshot) => {
     const value: EditorValue = props.outputFormat === 'html' ? snapshot.html : snapshot.json
     lastEmitted = value
@@ -94,13 +120,24 @@ defineExpose({
   editor,
   getSnapshot: () => (editor.value ? snapshotContent(editor.value) : null),
   focus: () => editor.value?.commands.focus(),
-  clear: () => editor.value?.chain().focus().clearContent(true).run(),
+  clear: () => (editor.value ? clearContent(editor.value) : false),
 })
 </script>
 
 <template>
   <div class="easy-editor" :class="{ 'is-disabled': !editable }">
-    <EditorToolbar v-if="showToolbar && editor" :editor="editor" />
-    <EditorContent v-if="editor" class="easy-editor__content" :editor="editor" />
+    <EditorToolbar
+      v-if="showToolbar && editor"
+      :editor="editor"
+      :upload-image="uploadImage"
+      :image-accept="imageAccept"
+    />
+
+    <!-- 表格和图片的浮动面板都用 absolute 定位，锚点就是这一层，所以它必须 position: relative。 -->
+    <div class="easy-editor__area">
+      <EditorContent v-if="editor" class="easy-editor__content" :editor="editor" />
+      <TablePanel v-if="editor" :editor="editor" />
+      <ImagePanel v-if="editor" :editor="editor" />
+    </div>
   </div>
 </template>

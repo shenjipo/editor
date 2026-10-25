@@ -19,6 +19,14 @@ export default defineConfig({
     // 别名指向源码后，vue 必须去重，否则 tiptap 的 vue 适配层会拿到第二份运行时。
     dedupe: ['vue', '@tiptap/core', '@tiptap/pm'],
   },
+  optimizeDeps: {
+    // core 源码里的裸导入（`@tiptap/pm/<子路径>`、mention 扩展）必须和 tiptap
+    // 的其它依赖走同一个预构建图，否则 Vite 会给它们单开一份 prosemirror-state：
+    // 两个 Plugin 类各自生成自动 key（都是 `plugin$`），reconfigure 时就报
+    // Adding different instances of a keyed plugin。
+    // 列出后即使开发中新增这些依赖，也只会触发一次重新预构建，不会退化成裸 ESM。
+    include: ['@tiptap/pm/state', '@tiptap/pm/history', '@tiptap/extension-mention'],
+  },
   server: {
     port: 5173,
   },

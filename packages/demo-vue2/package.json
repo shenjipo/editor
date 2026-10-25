@@ -1,0 +1,32 @@
+{
+  "name": "@easy-editor/demo-vue2",
+  "version": "0.1.0",
+  "private": true,
+  "description": "easy-editor 的 Vue 2.7 演示工程（不发布）",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@easy-editor/core": "workspace:*",
+    "@easy-editor/vue2": "workspace:*",
+    "@tiptap/core": "3.31.3",
+    "@tiptap/extension-mention": "3.31.3",
+    "@tiptap/pm": "3.31.3",
+    "@tiptap/vue-2": "3.31.3",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "1.0.2",
+    "marked": "^18.0.14",
+    "vue": "2.7.16"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "@vitejs/plugin-vue2": "^2.3.4",
+    "typescript": "^5.9.2",
+    "vite": "^4.5.14",
+    "vue-tsc": "^2.2.12"
+  }
+}

@@ -30,4 +30,19 @@ export interface ActiveFormats {
   bulletList: boolean
   /** 选区是否处于有序列表中。 */
   orderedList: boolean
+
+  /** 以下为 v2 新增。 */
+
+  bold: boolean
+  italic: boolean
+  underline: boolean
+  /** 光标是否在代码块里。 */
+  codeBlock: boolean
+  /** 当前代码块的语言，未设置（纯文本）时为 null。 */
+  codeBlockLanguage: string | null
+  /** 光标处链接的 href，不在链接上时为 null。 */
+  link: string | null
+  /** 历史栈里是否还有可撤销 / 可重做的步骤。 */
+  canUndo: boolean
+  canRedo: boolean
 }

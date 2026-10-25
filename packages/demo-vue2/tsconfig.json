@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["vite/client"],
+    "paths": {
+      "@easy-editor/core": ["../core/src/index.ts"],
+      "@easy-editor/vue2": ["../editor-vue2/src/index.ts"]
+    }
+  },
+  "vueCompilerOptions": {
+    "target": 2.7
+  },
+  "include": ["src", "vite.config.ts"]
+}

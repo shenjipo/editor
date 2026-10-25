@@ -14,6 +14,14 @@ const NEUTRAL_FORMATS: ActiveFormats = {
   backgroundColor: null,
   bulletList: false,
   orderedList: false,
+  bold: false,
+  italic: false,
+  underline: false,
+  codeBlock: false,
+  codeBlockLanguage: null,
+  link: null,
+  canUndo: false,
+  canRedo: false,
 }
 
 /**
@@ -25,6 +33,10 @@ const NEUTRAL_FORMATS: ActiveFormats = {
  *
  * 注意用的是 'transaction' 而不是 'update'：'update' 只在文档内容变化时触发，
  * 光移动光标或切换 mark 不会发。'transaction' 覆盖全部情况。
+ *
+ * 也不要再订阅 'selectionUpdate'：Tiptap 在 dispatch 里先发 'transaction'，
+ * 紧接着为同一次选区变化补发 'selectionUpdate'，两个事件带的是同一个 state。
+ * 一起订阅等于每次移动光标算两遍，而重算一次要跑十几项 isActive / getAttributes。
  */
 export function useActiveFormats(editor: MaybeRefOrGetter<Editor | undefined>): Ref<ActiveFormats> {
   const formats = ref<ActiveFormats>(NEUTRAL_FORMATS)
@@ -39,7 +51,6 @@ export function useActiveFormats(editor: MaybeRefOrGetter<Editor | undefined>): 
   function unsubscribe(): void {
     if (!subscribed) return
     subscribed.off('transaction', recompute)
-    subscribed.off('selectionUpdate', recompute)
     subscribed = undefined
   }
 
@@ -53,7 +64,6 @@ export function useActiveFormats(editor: MaybeRefOrGetter<Editor | undefined>): 
 
     subscribed = next
     next.on('transaction', recompute)
-    next.on('selectionUpdate', recompute)
     recompute()
   }
 

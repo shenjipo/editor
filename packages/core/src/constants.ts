@@ -25,6 +25,16 @@ export type FontSizeValue = (typeof FONT_SIZE_OPTIONS)[number]
 /** 新文档的默认字号。与 FONT_SIZE_OPTIONS 中「不写 inline style」的那一档保持一致。 */
 export const DEFAULT_FONT_SIZE: FontSizeValue = '16px'
 
+/**
+ * 图片宽度预设。
+ *
+ * 取值直接进 `style="width: …"`，与 wangEditor 的 imageWidth30 / 50 / 100 三个菜单一致。
+ * 「图片按容器百分比缩放」是它定的模型，不是这里现编的。
+ */
+export const IMAGE_WIDTH_PRESETS = ['30%', '50%', '100%'] as const
+
+export type ImageWidthPreset = (typeof IMAGE_WIDTH_PRESETS)[number]
+
 /** 字体颜色默认色板。 */
 export const TEXT_COLOR_PALETTE = [
   '#000000',
@@ -67,3 +77,49 @@ export const BACKGROUND_COLOR_PALETTE = [
 
 /** ProseMirror 根节点 class，编辑器样式全部挂在这个 class 下。 */
 export const EDITOR_ROOT_CLASS = 'easy-editor'
+
+/**
+ * 代码块可选语言。
+ *
+ * 取值直接进 `class="language-xxx"`。这里只列 highlight.js 的 `common` 集合里
+ * 确定注册过的语言（含 html / js / ts 这类别名），否则代码块会退化成自动推断高亮。
+ * 命名与 wangEditor v5 的 Prism 基本一致，两边的 HTML 可以互认。
+ *
+ * 空字符串代表「纯文本」——不写 class，与 wangEditor 未选语言时一致。
+ */
+export const CODE_BLOCK_LANGUAGES = [
+  'javascript',
+  'typescript',
+  'jsx',
+  'html',
+  'css',
+  'scss',
+  'less',
+  'json',
+  'yaml',
+  'xml',
+  'markdown',
+  'python',
+  'java',
+  'kotlin',
+  'swift',
+  'c',
+  'cpp',
+  'csharp',
+  'go',
+  'rust',
+  'php',
+  'ruby',
+  'sql',
+  'bash',
+  'shell',
+  'diff',
+] as const
+
+export type CodeBlockLanguage = (typeof CODE_BLOCK_LANGUAGES)[number]
+
+/** 「插入表格」网格选择器的上限，也是插入命令的行列数上限。 */
+export const TABLE_SIZE_LIMIT = {
+  rows: 10,
+  cols: 10,
+} as const

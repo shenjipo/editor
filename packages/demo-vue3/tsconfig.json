@@ -5,7 +5,13 @@
     "types": ["vite/client"],
     "paths": {
       "@easy-editor/core": ["../core/src/index.ts"],
-      "@easy-editor/vue3": ["../editor-vue3/src/index.ts"]
+      "@easy-editor/vue3": ["../editor-vue3/src/index.ts"],
+      // @wangeditor/editor-for-vue@5.1.12 的 exports 里没有 types 条件，
+      // moduleResolution: bundler 就会忽略它的顶层 types 字段，直接报「找不到声明文件」。
+      // 手动指到真实声明上，比在 demo 里手写一份 any 的模块声明靠谱。
+      "@wangeditor/editor-for-vue": [
+        "./node_modules/@wangeditor/editor-for-vue/dist/src/index.d.ts"
+      ]
     }
   },
   "include": ["src", "vite.config.ts"]

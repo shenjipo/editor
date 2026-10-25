@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 
+import { useDismiss } from '../composables/use-dismiss'
 import { TRANSPARENT_COLOR } from '../labels'
 
 const props = withDefaults(
@@ -25,6 +26,8 @@ const emit = defineEmits<{
 const isOpen = ref(false)
 const root = ref<HTMLElement | null>(null)
 
+const { close } = useDismiss({ root, isOpen })
+
 const triggerClass = computed(() => [
   'easy-editor-color__trigger',
   `easy-editor-color__trigger--${props.variant}`,
@@ -46,10 +49,6 @@ function toggle(): void {
   isOpen.value = !isOpen.value
 }
 
-function close(): void {
-  isOpen.value = false
-}
-
 function pick(color: string): void {
   if (color === TRANSPARENT_COLOR) {
     emit('clear')
@@ -67,26 +66,6 @@ function pickCustom(event: Event): void {
 const customColorValue = computed(() =>
   props.modelValue && /^#[0-9a-f]{6}$/i.test(props.modelValue) ? props.modelValue : '#000000',
 )
-
-function handlePointerDown(event: PointerEvent): void {
-  if (!isOpen.value) return
-  if (root.value && !root.value.contains(event.target as Node)) close()
-}
-
-function handleKeydown(event: KeyboardEvent): void {
-  if (event.key === 'Escape') close()
-}
-
-// 点外部关闭 + Esc 关闭。用捕获阶段监听 pointerdown，避免被内部按钮的 click 抢先。
-onMounted(() => {
-  document.addEventListener('pointerdown', handlePointerDown, true)
-  document.addEventListener('keydown', handleKeydown)
-})
-
-onBeforeUnmount(() => {
-  document.removeEventListener('pointerdown', handlePointerDown, true)
-  document.removeEventListener('keydown', handleKeydown)
-})
 </script>
 
 <template>
