@@ -1,6 +1,6 @@
 {
     "name": "@shenjipo/editor-core",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "easy-editor 核心包：框架无关的 Tiptap 扩展装配、文档命令与编辑器状态计算",
     "license": "MIT",
     "type": "module",

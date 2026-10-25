@@ -1,6 +1,6 @@
 {
     "name": "@shenjipo/editor-vue2",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "easy-editor 的 Vue 2.7 适配层：编辑器组件、工具栏 UI 与 v-model 双向绑定",
     "license": "MIT",
     "type": "module",
