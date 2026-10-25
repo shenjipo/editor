@@ -20,7 +20,7 @@
         "version:packages": "changeset version && pnpm install --lockfile-only",
         "check:versions": "node scripts/check-versions.mjs",
         "release:dry": "pnpm check:versions && pnpm -r publish --access public --dry-run --no-git-checks",
-        "release": "pnpm check:versions && pnpm -r publish --access public && changeset tag"
+        "release": "pnpm check:versions && pnpm -r publish --access public && changeset git-tag"
     },
     "devDependencies": {
         "@changesets/cli": "^3.0.3",
