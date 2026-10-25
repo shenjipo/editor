@@ -1,49 +1,50 @@
 {
-  "name": "@easy-editor/vue2",
-  "version": "0.1.0",
-  "description": "easy-editor 的 Vue 2.7 适配层：编辑器组件、工具栏 UI 与 v-model 双向绑定",
-  "license": "MIT",
-  "type": "module",
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+    "name": "@easy-editor/vue2",
+    "version": "1.0.0",
+    "description": "easy-editor 的 Vue 2.7 适配层：编辑器组件、工具栏 UI 与 v-model 双向绑定",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": [
+        "**/*.css"
+    ],
+    "files": [
+        "dist",
+        "src"
+    ],
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        },
+        "./style.css": "./dist/style.css",
+        "./package.json": "./package.json"
     },
-    "./style.css": "./dist/style.css",
-    "./package.json": "./package.json"
-  },
-  "scripts": {
-    "build": "vite build && vue-tsc -p tsconfig.build.json",
-    "dev": "vite build --watch",
-    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
-  },
-  "dependencies": {
-    "@easy-editor/core": "workspace:*"
-  },
-  "peerDependencies": {
-    "@tiptap/core": "^3.31.3",
-    "@tiptap/vue-2": "^3.31.3",
-    "vue": "^2.7.0"
-  },
-  "devDependencies": {
-    "@tiptap/core": "3.31.3",
-    "@tiptap/pm": "3.31.3",
-    "@tiptap/suggestion": "3.31.3",
-    "@tiptap/vue-2": "3.31.3",
-    "@types/node": "^22.13.0",
-    "@vitejs/plugin-vue2": "^2.3.4",
-    "typescript": "^5.9.2",
-    "vite": "^4.5.14",
-    "vue": "2.7.16",
-    "vue-tsc": "^2.2.12"
-  }
+    "scripts": {
+        "build": "vite build && vue-tsc -p tsconfig.build.json",
+        "dev": "vite build --watch",
+        "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+    },
+    "dependencies": {
+        "@easy-editor/core": "workspace:*"
+    },
+    "peerDependencies": {
+        "@tiptap/core": "^3.31.3",
+        "@tiptap/vue-2": "^3.31.3",
+        "vue": "^2.7.0"
+    },
+    "devDependencies": {
+        "@tiptap/core": "3.31.3",
+        "@tiptap/pm": "3.31.3",
+        "@tiptap/suggestion": "3.31.3",
+        "@tiptap/vue-2": "3.31.3",
+        "@types/node": "^22.13.0",
+        "@vitejs/plugin-vue2": "^2.3.4",
+        "typescript": "^5.9.2",
+        "vite": "^4.5.14",
+        "vue": "2.7.16",
+        "vue-tsc": "^2.2.12"
+    }
 }
