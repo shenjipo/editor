@@ -1,8 +1,8 @@
 import { onBeforeUnmount, ref, toValue, watch } from 'vue'
 
-import { getActiveFormats } from '@easy-editor/core'
+import { getActiveFormats } from '@shenjipo/editor-core'
 
-import type { ActiveFormats } from '@easy-editor/core'
+import type { ActiveFormats } from '@shenjipo/editor-core'
 import type { Editor } from '@tiptap/vue-3'
 import type { MaybeRefOrGetter, Ref } from 'vue'
 

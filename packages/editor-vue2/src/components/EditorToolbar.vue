@@ -25,7 +25,7 @@ import {
   unsetFontSize,
   unsetLink,
   unsetTextColor,
-} from '@easy-editor/core'
+} from '@shenjipo/editor-core'
 
 import ColorPopover from './ColorPopover.vue'
 import ImagePopover from './ImagePopover.vue'
@@ -45,7 +45,7 @@ import {
 } from '../labels'
 
 import type { PropType } from 'vue'
-import type { ActiveFormats, BlockTypeValue, InsertImageOptions, InsertTableOptions } from '@easy-editor/core'
+import type { ActiveFormats, BlockTypeValue, InsertImageOptions, InsertTableOptions } from '@shenjipo/editor-core'
 import type { Editor } from '@tiptap/vue-2'
 
 export default defineComponent({

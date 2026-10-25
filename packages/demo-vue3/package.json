@@ -1,5 +1,5 @@
 {
-  "name": "@easy-editor/demo-vue3",
+  "name": "@shenjipo/demo-vue3",
   "version": "0.1.0",
   "private": true,
   "description": "easy-editor 的 Vue 3 演示工程（不发布）",
@@ -11,8 +11,8 @@
     "typecheck": "vue-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
-    "@easy-editor/core": "workspace:*",
-    "@easy-editor/vue3": "workspace:*",
+    "@shenjipo/editor-core": "workspace:*",
+    "@shenjipo/editor-vue3": "workspace:*",
     "@tiptap/core": "3.31.3",
     "@tiptap/extension-mention": "3.31.3",
     "@tiptap/pm": "3.31.3",

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 
-import { deleteImage, getActiveImage, IMAGE_WIDTH_PRESETS, setImageWidth, updateImage } from '@easy-editor/core'
+import { deleteImage, getActiveImage, IMAGE_WIDTH_PRESETS, setImageWidth, updateImage } from '@shenjipo/editor-core'
 
 import ImageEditDialog from './ImageEditDialog.vue'
 import { IMAGE_EDIT_DIALOG_LABELS, IMAGE_PANEL_LABELS } from '../labels'
 
-import type { ActiveImage } from '@easy-editor/core'
+import type { ActiveImage } from '@shenjipo/editor-core'
 import type { ImageFormValue } from './ImageEditDialog.vue'
 import type { Editor } from '@tiptap/vue-3'
 

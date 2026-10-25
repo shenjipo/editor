@@ -48,5 +48,5 @@ export type {
   ToolbarOption,
 } from './labels'
 
-// 核心包的 API 整体转发：消费方只依赖 @easy-editor/vue3 一个包就够了。
-export * from '@easy-editor/core'
+// 核心包的 API 整体转发：消费方只依赖 @shenjipo/editor-vue3 一个包就够了。
+export * from '@shenjipo/editor-core'

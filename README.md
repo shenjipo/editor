@@ -20,9 +20,9 @@ HTML 产出对齐 [wangEditor v5](https://www.wangeditor.com/)，v-model 数据�
 
 ```
 packages/
-├── core/           @easy-editor/core  框架无关：扩展装配、文档命令、编辑器状态计算
-├── editor-vue3/    @easy-editor/vue3  Vue 3 适配层：编辑器组件、工具栏 UI、v-model
-├── editor-vue2/    @easy-editor/vue2  Vue 2.7 适配层：与 vue3 同功能、同 v-model 语义
+├── core/           @shenjipo/editor-core  框架无关：扩展装配、文档命令、编辑器状态计算
+├── editor-vue3/    @shenjipo/editor-vue3  Vue 3 适配层：编辑器组件、工具栏 UI、v-model
+├── editor-vue2/    @shenjipo/editor-vue2  Vue 2.7 适配层：与 vue3 同功能、同 v-model 语义
 ├── demo-vue3/      Vue 3 演示工程（private，Vite 8）
 └── demo-vue2/      Vue 2.7 演示工程（private，Vite 4）
 ```
@@ -79,7 +79,7 @@ pnpm build        # 按拓扑序全量构建：core → editor-vue2/vue3 → dem
 pnpm typecheck    # 五个包类型检查
 ```
 
-两个 demo 的 Vite 配置都把 `@easy-editor/core` 和对应适配层别名到源码，所以改包里的代码立即 HMR，**不需要先 build**。
+两个 demo 的 Vite 配置都把 `@shenjipo/editor-core` 和对应适配层别名到源码，所以改包里的代码立即 HMR，**不需要先 build**。
 `demo-vue2` 固定使用 Vue 2.7 + Vite 4（`@vitejs/plugin-vue2`），`demo-vue3` 使用 Vue 3 + 当前 Vite。
 
 两个 demo 的页面结构相同，都分五块：
@@ -100,44 +100,44 @@ wangEditor 和 `marked` 都只是 demo 的依赖，三个发布包本身都不�
 // vite.config.ts
 resolve: {
   alias: [
-    { find: '@easy-editor/vue3/style.css', replacement: '<repo>/packages/editor-vue3/src/styles/editor.css' },
-    { find: '@easy-editor/vue3', replacement: '<repo>/packages/editor-vue3/src/index.ts' },
-    { find: '@easy-editor/core', replacement: '<repo>/packages/core/src/index.ts' },
+    { find: '@shenjipo/editor-vue3/style.css', replacement: '<repo>/packages/editor-vue3/src/styles/editor.css' },
+    { find: '@shenjipo/editor-vue3', replacement: '<repo>/packages/editor-vue3/src/index.ts' },
+    { find: '@shenjipo/editor-core', replacement: '<repo>/packages/core/src/index.ts' },
   ],
   dedupe: ['vue', '@tiptap/core', '@tiptap/pm'],
 }
 ```
 
-Vue 2 demo 的写法相同，只是把 `@easy-editor/vue3` 换成 `@easy-editor/vue2`、目标指向
+Vue 2 demo 的写法相同，只是把 `@shenjipo/editor-vue3` 换成 `@shenjipo/editor-vue2`、目标指向
 `packages/editor-vue2/src`；插件换成 `@vitejs/plugin-vue2`。
 
 ### 在外部项目（吃 dist）
 
 ```bash
-pnpm add @easy-editor/vue3 @easy-editor/core vue @tiptap/core @tiptap/vue-3 @tiptap/pm
+pnpm add @shenjipo/editor-vue3 @shenjipo/editor-core vue @tiptap/core @tiptap/vue-3 @tiptap/pm
 ```
 
 ```ts
-import { EasyEditor } from '@easy-editor/vue3'
+import { EasyEditor } from '@shenjipo/editor-vue3'
 // ⚠️ 必须手动引入样式
-import '@easy-editor/vue3/style.css'
+import '@shenjipo/editor-vue3/style.css'
 ```
 
 > **为什么要手动引 CSS**：构建走 Vite lib 模式，CSS 被提取成独立的 `dist/style.css`，JS 入口不会自动带上它。走源码别名时 Vite 会注入，所以 demo 里看不出这个差别——但 dist 消费方漏了这一行就会得到一个完全没样式的编辑器。
 >
-> `vue` / `@tiptap/*` 是 `@easy-editor/vue3` 的 **peerDependencies**（构建时已 external），由消费方安装，避免打进重复的 Vue 或出现两份 `@tiptap/core`（两份会导致「两个 Editor 类」的类型与运行时错误）。
+> `vue` / `@tiptap/*` 是 `@shenjipo/editor-vue3` 的 **peerDependencies**（构建时已 external），由消费方安装，避免打进重复的 Vue 或出现两份 `@tiptap/core`（两份会导致「两个 Editor 类」的类型与运行时错误）。
 
 ### 在外部项目（Vue 2.7）
 
 ```bash
-pnpm add @easy-editor/vue2 @easy-editor/core vue@2.7 @tiptap/core @tiptap/vue-2 @tiptap/pm
+pnpm add @shenjipo/editor-vue2 @shenjipo/editor-core vue@2.7 @tiptap/core @tiptap/vue-2 @tiptap/pm
 ```
 
 ```ts
 import Vue from 'vue'
-import { EasyEditor } from '@easy-editor/vue2'
+import { EasyEditor } from '@shenjipo/editor-vue2'
 // ⚠️ 同样必须手动引样式
-import '@easy-editor/vue2/style.css'
+import '@shenjipo/editor-vue2/style.css'
 
 Vue.component('EasyEditor', EasyEditor)
 ```
@@ -159,8 +159,8 @@ Vue.component('EasyEditor', EasyEditor)
 
 ```vue
 <script setup lang="ts">
-import { EasyEditor } from '@easy-editor/vue3'
-import type { EditorContentSnapshot } from '@easy-editor/vue3'
+import { EasyEditor } from '@shenjipo/editor-vue3'
+import type { EditorContentSnapshot } from '@shenjipo/editor-vue3'
 import { ref } from 'vue'
 
 const content = ref('<p>初始内容</p>')
@@ -218,8 +218,8 @@ async function uploadImage(file: File) {
 
 ```vue
 <script setup lang="ts">
-import { EasyEditor } from '@easy-editor/vue3'
-import type { MentionItem, MentionSource } from '@easy-editor/vue3'
+import { EasyEditor } from '@shenjipo/editor-vue3'
+import type { MentionItem, MentionSource } from '@shenjipo/editor-vue3'
 import { ref } from 'vue'
 
 const content = ref('')
@@ -308,10 +308,10 @@ import {
   HEADING_LEVELS, FONT_SIZE_OPTIONS, DEFAULT_FONT_SIZE,
   TEXT_COLOR_PALETTE, BACKGROUND_COLOR_PALETTE, PARAGRAPH_VALUE,
   CODE_BLOCK_LANGUAGES, TABLE_SIZE_LIMIT, IMAGE_WIDTH_PRESETS,
-} from '@easy-editor/core'
+} from '@shenjipo/editor-core'
 
 // mention 的类型
-import type { EasyMentionSource, MentionItem } from '@easy-editor/core'
+import type { EasyMentionSource, MentionItem } from '@shenjipo/editor-core'
 ```
 
 `createMentionExtension(sources)` 只装配 schema 与 Suggestion 插件：**什么时候触发、怎么把选中的项写进文档**在这里；
@@ -336,7 +336,7 @@ ProseMirror 会把 NodeSelection 映射成光标，图片面板下一帧就因�
 
 ```ts
 import { Editor } from '@tiptap/core'
-import { createEasyEditorExtensions } from '@easy-editor/core'
+import { createEasyEditorExtensions } from '@shenjipo/editor-core'
 
 const editor = new Editor({ extensions: createEasyEditorExtensions({ placeholder: '输入…' }) })
 ```

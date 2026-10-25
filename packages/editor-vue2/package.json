@@ -1,5 +1,5 @@
 {
-    "name": "@easy-editor/vue2",
+    "name": "@shenjipo/editor-vue2",
     "version": "1.0.0",
     "description": "easy-editor 的 Vue 2.7 适配层：编辑器组件、工具栏 UI 与 v-model 双向绑定",
     "license": "MIT",
@@ -11,6 +11,9 @@
         "dist",
         "src"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "main": "./dist/index.js",
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -25,10 +28,11 @@
     "scripts": {
         "build": "vite build && vue-tsc -p tsconfig.build.json",
         "dev": "vite build --watch",
-        "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+        "typecheck": "vue-tsc --noEmit -p tsconfig.json",
+        "prepublishOnly": "pnpm build && node ../../scripts/check-versions.mjs"
     },
     "dependencies": {
-        "@easy-editor/core": "workspace:*"
+        "@shenjipo/editor-core": "workspace:*"
     },
     "peerDependencies": {
         "@tiptap/core": "^3.31.3",

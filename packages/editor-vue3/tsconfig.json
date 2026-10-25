@@ -4,7 +4,7 @@
     "noEmit": true,
     "types": ["vite/client"],
     "paths": {
-      "@easy-editor/core": ["../core/src/index.ts"]
+      "@shenjipo/editor-core": ["../core/src/index.ts"]
     }
   },
   "include": ["src", "vite.config.ts"]

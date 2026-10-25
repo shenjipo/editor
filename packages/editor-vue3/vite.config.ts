@@ -12,7 +12,7 @@ export default defineConfig({
       entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
       formats: ['es'],
       fileName: () => 'index.js',
-      // 不指定的话会按包名产成 vue3.css，public API 就成了 @easy-editor/vue3/vue3.css。
+      // 不指定的话会按包名产成 vue3.css，public API 就成了 @shenjipo/editor-vue3/vue3.css。
       cssFileName: 'style',
     },
     // 所有 CSS 合并成一个文件，消费方一行 import 就够。
@@ -20,7 +20,7 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       // 必须 external：否则每个消费方都会打进一份 vue / tiptap / 核心包。
-      external: ['vue', /^@tiptap\//, '@easy-editor/core'],
+      external: ['vue', /^@tiptap\//, '@shenjipo/editor-core'],
     },
   },
 })

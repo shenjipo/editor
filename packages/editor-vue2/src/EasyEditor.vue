@@ -3,7 +3,7 @@ import { defineComponent, markRaw } from 'vue'
 
 import { Editor } from '@tiptap/vue-2'
 
-import { clearContent, createEasyEditorExtensions, snapshotContent } from '@easy-editor/core'
+import { clearContent, createEasyEditorExtensions, snapshotContent } from '@shenjipo/editor-core'
 
 import EditorToolbar from './components/EditorToolbar.vue'
 import ImagePanel from './components/ImagePanel.vue'
@@ -11,7 +11,7 @@ import TablePanel from './components/TablePanel.vue'
 import { createMentionSources } from './mention'
 
 import type { PropType } from 'vue'
-import type { EditorContentSnapshot } from '@easy-editor/core'
+import type { EditorContentSnapshot } from '@shenjipo/editor-core'
 import type { JSONContent } from '@tiptap/core'
 import type { MentionSource } from './mention'
 

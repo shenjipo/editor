@@ -22,7 +22,7 @@ import {
   unsetFontSize,
   unsetLink,
   unsetTextColor,
-} from '@easy-editor/core'
+} from '@shenjipo/editor-core'
 
 import ColorPopover from './ColorPopover.vue'
 import ImagePopover from './ImagePopover.vue'
@@ -41,7 +41,7 @@ import {
   TOOLBAR_LABELS,
 } from '../labels'
 
-import type { BlockTypeValue } from '@easy-editor/core'
+import type { BlockTypeValue } from '@shenjipo/editor-core'
 import type { Editor } from '@tiptap/vue-3'
 
 const props = withDefaults(

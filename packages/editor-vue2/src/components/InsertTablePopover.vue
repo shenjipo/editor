@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import { TABLE_SIZE_LIMIT } from '@easy-editor/core'
+import { TABLE_SIZE_LIMIT } from '@shenjipo/editor-core'
 
 import ToolbarButton from './ToolbarButton.vue'
 import { attachDismiss } from '../composables/dismiss'

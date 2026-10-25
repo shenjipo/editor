@@ -2,7 +2,7 @@
 import { defineComponent } from 'vue'
 
 import type { PropType } from 'vue'
-import type { MentionItem } from '@easy-editor/core'
+import type { MentionItem } from '@shenjipo/editor-core'
 import type { MentionLabels } from '../labels'
 
 export default defineComponent({

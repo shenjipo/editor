@@ -11,7 +11,7 @@ import {
   deleteTable,
   getActiveTableRange,
   toggleHeaderRow,
-} from '@easy-editor/core'
+} from '@shenjipo/editor-core'
 
 import { TABLE_PANEL_LABELS } from '../labels'
 

@@ -7,13 +7,13 @@ import {
   IMAGE_WIDTH_PRESETS,
   setImageWidth,
   updateImage,
-} from '@easy-editor/core'
+} from '@shenjipo/editor-core'
 
 import ImageEditDialog from './ImageEditDialog.vue'
 import { IMAGE_EDIT_DIALOG_LABELS, IMAGE_PANEL_LABELS } from '../labels'
 
 import type { PropType } from 'vue'
-import type { ActiveImage } from '@easy-editor/core'
+import type { ActiveImage } from '@shenjipo/editor-core'
 import type { Editor } from '@tiptap/vue-2'
 import type { ImageFormValue } from './ImageEditDialog.vue'
 

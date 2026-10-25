@@ -12,9 +12,9 @@ export default defineConfig({
     // 演示工程直接吃源码：改包里的代码立即 HMR，不用先 build。
     // 更具体的子路径别名必须排在包名别名前面。
     alias: [
-      { find: '@easy-editor/vue2/style.css', replacement: `${editorVue2Source}/styles/editor.css` },
-      { find: '@easy-editor/vue2', replacement: `${editorVue2Source}/index.ts` },
-      { find: '@easy-editor/core', replacement: `${coreSource}/index.ts` },
+      { find: '@shenjipo/editor-vue2/style.css', replacement: `${editorVue2Source}/styles/editor.css` },
+      { find: '@shenjipo/editor-vue2', replacement: `${editorVue2Source}/index.ts` },
+      { find: '@shenjipo/editor-core', replacement: `${coreSource}/index.ts` },
     ],
     // 别名指向源码后，vue 必须去重，否则 tiptap 的 vue 适配层会拿到第二份运行时。
     dedupe: ['vue', '@tiptap/core', '@tiptap/pm'],

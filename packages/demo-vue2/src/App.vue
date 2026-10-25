@@ -1,13 +1,13 @@
 <script lang="ts">
 import { defineComponent, markRaw } from 'vue'
 
-import { EasyEditor, readFileAsDataUrl } from '@easy-editor/vue2'
+import { EasyEditor, readFileAsDataUrl } from '@shenjipo/editor-vue2'
 import { Editor as WangEditor, Toolbar as WangToolbar } from '@wangeditor/editor-for-vue'
 
 import { INITIAL_CONTENT, SAMPLE_FROM_EASY, SAMPLE_FROM_WANG } from './samples'
 import { markdownToHtml, STREAM_DOCUMENT, streamMarkdown } from './streaming'
 
-import type { EditorContentSnapshot, MentionItem, MentionSource } from '@easy-editor/vue2'
+import type { EditorContentSnapshot, MentionItem, MentionSource } from '@shenjipo/editor-vue2'
 import type { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 
 /* ------------------------------------------------------------ 提及数据 */
@@ -218,8 +218,8 @@ export default defineComponent({
     <header class="page__header">
       <h1 class="page__title">easy-editor</h1>
       <p class="page__subtitle">
-        pnpm monorepo · <code>@easy-editor/core</code>（框架无关）+
-        <code>@easy-editor/vue2</code>（Vue 2.7 适配层）
+        pnpm monorepo · <code>@shenjipo/editor-core</code>（框架无关）+
+        <code>@shenjipo/editor-vue2</code>（Vue 2.7 适配层）
       </p>
     </header>
 

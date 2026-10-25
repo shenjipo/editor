@@ -17,7 +17,7 @@ export default defineConfig({
     cssCodeSplit: false,
     sourcemap: true,
     rollupOptions: {
-      external: ['vue', /^@tiptap\//, '@easy-editor/core'],
+      external: ['vue', /^@tiptap\//, '@shenjipo/editor-core'],
     },
   },
 })

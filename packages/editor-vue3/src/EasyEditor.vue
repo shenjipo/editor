@@ -2,7 +2,7 @@
 import { EditorContent } from '@tiptap/vue-3'
 import { watch } from 'vue'
 
-import { clearContent, snapshotContent } from '@easy-editor/core'
+import { clearContent, snapshotContent } from '@shenjipo/editor-core'
 
 import EditorToolbar from './components/EditorToolbar.vue'
 import ImagePanel from './components/ImagePanel.vue'
@@ -10,7 +10,7 @@ import TablePanel from './components/TablePanel.vue'
 import { useEasyEditor } from './composables/use-easy-editor'
 import { createMentionSources } from './mention'
 
-import type { EditorContentSnapshot } from '@easy-editor/core'
+import type { EditorContentSnapshot } from '@shenjipo/editor-core'
 import type { MentionSource } from './mention'
 import type { JSONContent } from '@tiptap/core'
 

@@ -1,0 +1,7 @@
+# 复制为 .npmrc 后按需填写。.npmrc 已被 .gitignore 忽略，不要提交真实 token。
+registry=https://registry.npmjs.org/
+
+# 本地发布：把 token 放在项目根的 .npmrc（本文件复制过去）或用户级 ~/.npmrc 里。
+# CI 中：设置 NPM_TOKEN secret，并用 `pnpm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN" --location project`
+# 临时写入 .npmrc，不要让 ${NPM_TOKEN} 未定义地留在项目 .npmrc —— pnpm 会报 ERR_PNPM_CONFIG_REPLACE_ENV。
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}

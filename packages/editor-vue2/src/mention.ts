@@ -3,7 +3,7 @@ import { VueRenderer } from '@tiptap/vue-2'
 import MentionPopover from './components/MentionPopover.vue'
 import { MENTION_LABELS } from './labels'
 
-import type { EasyMentionSource, MentionItem, MentionSuggestionOptions } from '@easy-editor/core'
+import type { EasyMentionSource, MentionItem, MentionSuggestionOptions } from '@shenjipo/editor-core'
 import type { MentionLabels } from './labels'
 import type { SuggestionOptions, SuggestionProps } from '@tiptap/suggestion'
 

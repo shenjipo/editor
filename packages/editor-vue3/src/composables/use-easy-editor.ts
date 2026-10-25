@@ -1,9 +1,9 @@
 import { useEditor } from '@tiptap/vue-3'
 
-import { createEasyEditorExtensions, snapshotContent } from '@easy-editor/core'
+import { createEasyEditorExtensions, snapshotContent } from '@shenjipo/editor-core'
 
 import type { Editor } from '@tiptap/vue-3'
-import type { EasyMentionSource, EditorContentSnapshot } from '@easy-editor/core'
+import type { EasyMentionSource, EditorContentSnapshot } from '@shenjipo/editor-core'
 import type { JSONContent } from '@tiptap/core'
 import type { ShallowRef } from 'vue'
 

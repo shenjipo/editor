@@ -1,6 +1,6 @@
-import { getActiveFormats } from '@easy-editor/core'
+import { getActiveFormats } from '@shenjipo/editor-core'
 
-import type { ActiveFormats } from '@easy-editor/core'
+import type { ActiveFormats } from '@shenjipo/editor-core'
 import type { Editor } from '@tiptap/vue-2'
 
 export const NEUTRAL_FORMATS: ActiveFormats = {

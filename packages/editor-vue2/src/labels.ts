@@ -1,6 +1,6 @@
-import { CODE_BLOCK_LANGUAGES, FONT_SIZE_OPTIONS, HEADING_LEVELS, PARAGRAPH_VALUE } from '@easy-editor/core'
+import { CODE_BLOCK_LANGUAGES, FONT_SIZE_OPTIONS, HEADING_LEVELS, PARAGRAPH_VALUE } from '@shenjipo/editor-core'
 
-import type { BlockTypeValue } from '@easy-editor/core'
+import type { BlockTypeValue } from '@shenjipo/editor-core'
 
 /*
  * 与 packages/editor-vue3/src/labels.ts 保持一致。
